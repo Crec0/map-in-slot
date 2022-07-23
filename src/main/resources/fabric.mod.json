@@ -6,6 +6,7 @@
   "description": "",
   "authors": [],
   "contact": {},
+  "icon": "icon.png",
   "license": "MIT",
   "environment": "client",
   "entrypoints": {},
@@ -14,6 +15,6 @@
   ],
   "depends": {
     "fabricloader": ">=0.14.8",
-    "minecraft": "1.18.2"
+    "minecraft": ["^1.17", "^1.18", "^1.19"]
   }
 }
