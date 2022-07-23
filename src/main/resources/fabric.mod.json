@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "id": "map-in-slot",
+  "version": "${version}",
+  "name": "Map in Slot",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {},
+  "mixins": [
+    "map-in-slot.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.14.8",
+    "minecraft": "1.18.2"
+  }
+}
