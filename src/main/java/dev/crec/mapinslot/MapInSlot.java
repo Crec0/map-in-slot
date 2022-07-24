@@ -4,16 +4,11 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.Tesselator;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.MapItem;
 import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 
 public class MapInSlot {
-	public static void renderMap(Minecraft mc, float blitOffset, Slot slot) {
-		renderMap(mc, blitOffset, slot.getItem(), slot.x, slot.y);
-	}
-
 	public static void renderMap(Minecraft mc, float blitOffset, ItemStack stack, int x, int y) {
 		if (mc.player == null) return;
 
