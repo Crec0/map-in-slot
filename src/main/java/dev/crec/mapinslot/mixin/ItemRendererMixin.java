@@ -34,7 +34,6 @@ public abstract class ItemRendererMixin implements ResourceManagerReloadListener
 		if (stack.is(Items.FILLED_MAP)) {
 			BakedModel bakedModel = this.getModel(stack, (Level)null, livingEntity, z);
 			blitOffset = (float)(50 + (bakedModel.isGui3d() ? l : 0));
-			System.out.println("Setting case: "+this.blitOffset);
 		}
 	}
 
@@ -45,7 +44,6 @@ public abstract class ItemRendererMixin implements ResourceManagerReloadListener
 	)
 	private void drawMap(PoseStack poseStack, Font font, ItemStack stack, int x, int y, String string, CallbackInfo ci) {
 		if (stack.is(Items.FILLED_MAP)) {
-			System.out.println("Calling case: "+this.blitOffset);
 			MapInSlot.renderMap(poseStack, Minecraft.getInstance(), blitOffset, stack, x, y);
 		}
 	}
