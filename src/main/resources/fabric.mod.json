@@ -4,7 +4,7 @@
   "version": "${version}",
   "name": "Map in Slot",
   "description": "",
-  "authors": [],
+  "authors": ["Crec0", "ella"],
   "contact": {},
   "icon": "icon.png",
   "license": "MIT",
