@@ -9,27 +9,23 @@ import net.minecraft.world.item.MapItem;
 import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 
 public class MapInSlot {
-	public static void renderMap(PoseStack poseStack1, Minecraft mc, float blitOffset, ItemStack stack, int x, int y) {
-		if (mc.player == null) return;
 
-		Integer mapId = MapItem.getMapId(stack);
-		MapItemSavedData saveData = MapItem.getSavedData(mapId, mc.player.level);
+	public static void renderMap(PoseStack poseStack, Minecraft minecraft, float blitOffset, ItemStack itemStack, int x, int y) {
+		if (minecraft.player == null) {
+			return;
+		}
 
-		if (mapId != null && saveData != null) {
+		Integer mapId = MapItem.getMapId(itemStack);
+		MapItemSavedData savedData = MapItem.getSavedData(mapId, minecraft.player.level);
+
+		if (mapId != null && savedData != null) {
 			MultiBufferSource.BufferSource bufferSource = MultiBufferSource.immediate(Tesselator.getInstance().getBuilder());
-			if (poseStack1.clear()) {
-				PoseStack poseStack = new PoseStack();
-				poseStack.translate(x, y, blitOffset + 190);
-				poseStack.scale(1 / 8F, 1 / 8F, 1);
-				mc.gameRenderer.getMapRenderer().render(poseStack, bufferSource, mapId, saveData, true, 0xF000D2);
-				bufferSource.endBatch();
-			} else {
-				PoseStack poseStack = poseStack1;
-				poseStack.translate(x, y, blitOffset + 190);
-				poseStack.scale(1 / 8F, 1 / 8F, 1);
-				mc.gameRenderer.getMapRenderer().render(poseStack, bufferSource, mapId, saveData, true, 0xF000D2);
-				bufferSource.endBatch();
-			}
+			poseStack.pushPose();
+			poseStack.translate(x, y, blitOffset + 190);
+			poseStack.scale(1 / 8F, 1 / 8F, 1);
+			minecraft.gameRenderer.getMapRenderer().render(poseStack, bufferSource, mapId, savedData, true, 0xF000D2);
+			bufferSource.endBatch();
+			poseStack.popPose();
 		}
 	}
 }
