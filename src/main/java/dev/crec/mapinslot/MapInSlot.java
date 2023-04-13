@@ -21,7 +21,7 @@ public class MapInSlot {
 		if (mapId != null && savedData != null) {
 			MultiBufferSource.BufferSource bufferSource = MultiBufferSource.immediate(Tesselator.getInstance().getBuilder());
 			poseStack.pushPose();
-			poseStack.translate(x, y, blitOffset + 190);
+			poseStack.translate(x, y, blitOffset + 150);
 			poseStack.scale(1 / 8F, 1 / 8F, 1);
 			minecraft.gameRenderer.getMapRenderer().render(poseStack, bufferSource, mapId, savedData, true, 0xF000D2);
 			bufferSource.endBatch();
