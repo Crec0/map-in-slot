@@ -4,7 +4,7 @@
   "version": "${version}",
   "name": "Map in Slot",
   "description": "",
-  "authors": [],
+  "authors": ["Crec0", "ella"],
   "contact": {},
   "icon": "icon.png",
   "license": "MIT",
@@ -15,6 +15,6 @@
   ],
   "depends": {
     "fabricloader": ">=0.14.8",
-    "minecraft": ["^1.17", "^1.18", "^1.19"]
+    "minecraft": ["^1.19"]
   }
 }
