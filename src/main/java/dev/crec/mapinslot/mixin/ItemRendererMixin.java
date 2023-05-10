@@ -14,6 +14,7 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -21,9 +22,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(ItemRenderer.class)
 public abstract class ItemRendererMixin implements ResourceManagerReloadListener {
 
-	public float blitOffset;
+	@Unique
+	private float blitOffset;
 
-	@Shadow public abstract BakedModel getModel(ItemStack itemStack, @Nullable Level level, @Nullable LivingEntity livingEntity, int i);
+	@Shadow
+	public abstract BakedModel getModel(ItemStack itemStack, @Nullable Level level, @Nullable LivingEntity livingEntity, int i);
 
 
 	@Inject(
@@ -32,8 +35,8 @@ public abstract class ItemRendererMixin implements ResourceManagerReloadListener
 	)
 	private void drawMap(PoseStack poseStack, LivingEntity livingEntity, Level level, ItemStack stack, int x, int y, int z, int l, CallbackInfo ci) {
 		if (stack.is(Items.FILLED_MAP)) {
-			BakedModel bakedModel = this.getModel(stack, (Level)null, livingEntity, z);
-			blitOffset = (float)(50 + (bakedModel.isGui3d() ? l : 0));
+			BakedModel bakedModel = this.getModel(stack, null, livingEntity, z);
+			this.blitOffset = (float)(50 + (bakedModel.isGui3d() ? l : 0));
 		}
 	}
 
@@ -44,7 +47,7 @@ public abstract class ItemRendererMixin implements ResourceManagerReloadListener
 	)
 	private void drawMap(PoseStack poseStack, Font font, ItemStack stack, int x, int y, String string, CallbackInfo ci) {
 		if (stack.is(Items.FILLED_MAP)) {
-			MapInSlot.renderMap(poseStack, Minecraft.getInstance(), blitOffset, stack, x, y);
+			MapInSlot.renderMap(poseStack, Minecraft.getInstance(), this.blitOffset, stack, x, y);
 		}
 	}
 }
