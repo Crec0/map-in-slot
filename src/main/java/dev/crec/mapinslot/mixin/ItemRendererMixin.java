@@ -5,7 +5,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.MapItem;
@@ -17,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(GuiGraphics.class)
-public abstract class ItemRendererMixin implements ResourceManagerReloadListener {
+public abstract class ItemRendererMixin {
 
     @Shadow
     @Final
@@ -48,9 +47,9 @@ public abstract class ItemRendererMixin implements ResourceManagerReloadListener
         this.pose().translate(i, j, 200F);
         this.pose().scale(0.125F, 0.125F, 1F);
         this.minecraft
-            .gameRenderer
-            .getMapRenderer()
-            .render(this.pose(), this.bufferSource(), mapId, savedData, true, 15728880);
+                .gameRenderer
+                .getMapRenderer()
+                .render(this.pose(), this.bufferSource(), mapId, savedData, true, 15728880);
         this.flush();
         this.pose().popPose();
     }
