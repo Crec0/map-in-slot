@@ -14,7 +14,7 @@
     "map-in-slot.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.14.8",
-    "minecraft": ["1.20.*"]
+    "fabricloader": ">=0.15.10",
+    "minecraft": ["1.20.5"]
   }
 }

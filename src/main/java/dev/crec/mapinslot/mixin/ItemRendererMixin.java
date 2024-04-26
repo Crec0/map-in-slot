@@ -5,6 +5,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.MapItem;
@@ -38,7 +40,7 @@ public abstract class ItemRendererMixin {
     private void drawMap(Font font, ItemStack stack, int i, int j, String string, CallbackInfo ci) {
         if (!stack.is(Items.FILLED_MAP)) return;
 
-        var mapId = MapItem.getMapId(stack);
+        var mapId = stack.get(DataComponents.MAP_ID);
         var savedData = MapItem.getSavedData(mapId, this.minecraft.level);
 
         if (savedData == null) return;
