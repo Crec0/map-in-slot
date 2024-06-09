@@ -34,7 +34,7 @@ public abstract class ItemRendererMixin {
 
     @Inject(
             method = "renderItemDecorations(Lnet/minecraft/client/gui/Font;Lnet/minecraft/world/item/ItemStack;IILjava/lang/String;)V",
-            at = @At(value = "TAIL")
+            at = @At(value = "HEAD")
     )
     private void drawMap(Font font, ItemStack stack, int i, int j, String string, CallbackInfo ci) {
         if (!stack.is(Items.FILLED_MAP)) return;
