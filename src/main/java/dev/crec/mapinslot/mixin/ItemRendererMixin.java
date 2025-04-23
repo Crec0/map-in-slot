@@ -59,7 +59,6 @@ public abstract class ItemRendererMixin {
 
         this.drawSpecial(bufferSource -> renderer.render(mapRenderState, this.pose(), bufferSource, true, 0xF000F0));
 
-        this.flush();
         this.pose().popPose();
     }
 }
