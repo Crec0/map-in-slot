@@ -1,15 +1,14 @@
 package dev.crec.mapinslot.mixin;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.state.MapRenderState;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.MapItem;
+import org.joml.Matrix3x2fStack;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -18,23 +17,18 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.function.Consumer;
-
 @Mixin(GuiGraphics.class)
 public abstract class ItemRendererMixin {
 
     @Shadow
     @Final
     private Minecraft minecraft;
-
+    
+    @Shadow public abstract Matrix3x2fStack pose();
+    
     @Shadow
-    public abstract PoseStack pose();
-
-    @Shadow
-    public abstract void flush();
-
-    @Shadow public abstract void drawSpecial(Consumer<MultiBufferSource> consumer);
-
+    public abstract void submitMapRenderState(MapRenderState mapRenderState);
+    
     @Unique
     private final MapRenderState mapRenderState = new MapRenderState();
 
@@ -50,15 +44,13 @@ public abstract class ItemRendererMixin {
 
         if (savedData == null) return;
 
-        this.pose().pushPose();
-        this.pose().translate(i, j, 200F);
-        this.pose().scale(0.125F, 0.125F, 1F);
+        this.pose().pushMatrix();
+        this.pose().translate(i, j);
+        this.pose().scale(0.125F, 0.125F);
 
-        var renderer = this.minecraft.getMapRenderer();
-        renderer.extractRenderState(mapId, savedData, this.mapRenderState);
+        this.minecraft.getMapRenderer().extractRenderState(mapId, savedData, this.mapRenderState);
+        this.submitMapRenderState(this.mapRenderState);
 
-        this.drawSpecial(bufferSource -> renderer.render(mapRenderState, this.pose(), bufferSource, true, 0xF000F0));
-
-        this.pose().popPose();
+        this.pose().popMatrix();
     }
 }
