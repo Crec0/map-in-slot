@@ -1,8 +1,10 @@
 Map in Slot - Credits & Attribution
 
 Original mod:
-- Created by Crec0 and ella (MIT License)
+- Created by Crec0 (MIT License)
   https://github.com/Crec0/map-in-slot
+
+- Pull request updates by ella
 
 Map item cutout overlays, final map layer graphics & rotation rendering layout:
 - Designed, created, and contributed by FitchWorks (https://github.com/FitchWorks).
