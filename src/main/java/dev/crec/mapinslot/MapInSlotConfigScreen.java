@@ -11,7 +11,7 @@ import net.minecraft.network.chat.Component;
 public class MapInSlotConfigScreen extends OptionsSubScreen {
 
     public MapInSlotConfigScreen(Screen parent) {
-        super(parent, Minecraft.getInstance().options, Component.literal("Map In Slot Settings"));
+        super(parent, Minecraft.getInstance().options, Component.literal("Map in Slot Settings"));
     }
 
     // Use Button instead of CycleButton because CycleButton.OnValueChange moved to AbstractCycleButton in 26.4

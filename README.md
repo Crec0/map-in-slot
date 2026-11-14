@@ -1,6 +1,6 @@
-<img src="./assets/map-in-slot-banner.png" alt="Map In Slot" width="512" />
+<img src="./assets/map-in-slot-banner.png" alt="Map in Slot" width="512" />
 
-# Map In Slot
+# Map in Slot
 
 Simple mod to render filled map in the hotbar/inventory slots. So you don't have to keep look at each map individually when moving them around.
 
