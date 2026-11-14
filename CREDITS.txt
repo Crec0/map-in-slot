@@ -1,0 +1,20 @@
+Map in Slot - Credits & Attribution
+
+Original mod:
+- Created by Crec0 and ella (MIT License)
+  https://github.com/Crec0/map-in-slot
+
+Map item cutout overlays, final map layer graphics & rotation rendering layout:
+- Designed, created, and contributed by FitchWorks (https://github.com/FitchWorks).
+- Copyright (c) 2026 FitchWorks.
+
+New map overlay & locked map glass:
+- Inspired by vanilla Minecraft item textures and assets by Mojang Studios / Microsoft Corporation.
+
+32x32 & 64x64 overlays:
+- Adapted from Faithful 32x and Faithful 64x's filled_map and map_locked item textures.
+- Created by the Faithful Team under the Faithful Project License.
+- Used in compliance with the Faithful Project License (free, non-commercial, attributed).
+- Official website: https://faithfulpack.net
+- License information: https://faithfulpack.net/license
+
