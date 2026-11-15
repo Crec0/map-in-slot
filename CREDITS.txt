@@ -6,7 +6,7 @@ Original mod:
 
 - Pull request updates by ella
 
-Map item cutout overlays, final map layer graphics & rotation rendering layout:
+Mod icon, banner, cutout overlays & rendering layout:
 - Designed, created, and contributed by FitchWorks (https://github.com/FitchWorks).
 - Copyright (c) 2026 FitchWorks.
 
