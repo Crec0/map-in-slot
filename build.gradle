@@ -16,12 +16,18 @@ repositories {
     // Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
     // See https://docs.gradle.org/current/userguide/declaring_repositories.html
     // for more information about repositories.
+
+    maven {
+        name = "TerraformersMC"
+        url = "https://maven.terraformersmc.com/releases/"
+    }
 }
 
 dependencies {
     // To change the versions see the gradle.properties file
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
     implementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    compileOnly "com.terraformersmc:modmenu:21.0.0"
 }
 
 processResources {
@@ -61,6 +67,7 @@ jar {
     from("LICENSE") {
         rename { "${it}_${inputs.properties.archivesName}" }
     }
+    from("CREDITS.txt")
 }
 
 // configure the maven publication

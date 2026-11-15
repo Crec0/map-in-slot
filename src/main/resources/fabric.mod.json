@@ -3,7 +3,7 @@
     "id": "map-in-slot",
     "version": "${version}",
     "name": "Map in Slot",
-    "description": "",
+    "description": "Make maps render in inventory/hotbar slots",
     "authors": [
         "Crec0",
         "ella"
@@ -12,14 +12,17 @@
     "icon": "icon.png",
     "license": "MIT",
     "environment": "client",
-    "entrypoints": {},
+    "entrypoints": {
+        "modmenu": [
+            "dev.crec.mapinslot.ModMenuIntegration"
+        ]
+    },
     "mixins": [
         "map-in-slot.mixins.json"
     ],
     "depends": {
         "fabricloader": ">=0.15.10",
-        "minecraft": [
-            ">=21.1"
-        ]
+        "minecraft": ">=26.1",
+        "java": ">=25"
     }
 }

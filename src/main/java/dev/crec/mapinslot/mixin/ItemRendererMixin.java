@@ -1,20 +1,16 @@
 package dev.crec.mapinslot.mixin;
 
+import dev.crec.mapinslot.MapInSlotRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
-import net.minecraft.client.renderer.state.MapRenderState;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.MapItem;
-import org.joml.Matrix3x2fStack;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(GuiGraphicsExtractor.class)
@@ -23,34 +19,21 @@ public abstract class ItemRendererMixin {
     @Shadow
     @Final
     private Minecraft minecraft;
-    
-    @Shadow public abstract Matrix3x2fStack pose();
-    
-    @Shadow
-    public abstract void map(MapRenderState mapRenderState);
-    
-    @Unique
-    private final MapRenderState mapRenderState = new MapRenderState();
+
+    @ModifyVariable(
+            method = "item(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;III)V",
+            at = @At("HEAD"),
+            argsOnly = true
+    )
+    private ItemStack replaceFilledMapWithBlank(ItemStack itemStack) {
+        return MapInSlotRenderer.resolveItemStack(this.minecraft, itemStack);
+    }
 
     @Inject(
             method = "itemDecorations(Lnet/minecraft/client/gui/Font;Lnet/minecraft/world/item/ItemStack;IILjava/lang/String;)V",
             at = @At(value = "HEAD")
     )
     private void drawMap(Font font, ItemStack itemStack, int x, int y, String countText, CallbackInfo ci) {
-        if (!itemStack.is(Items.FILLED_MAP)) return;
-
-        var mapId = itemStack.get(DataComponents.MAP_ID);
-        var savedData = MapItem.getSavedData(mapId, this.minecraft.level);
-
-        if (savedData == null) return;
-
-        this.pose().pushMatrix();
-        this.pose().translate(x, y);
-        this.pose().scale(0.125F, 0.125F);
-
-        this.minecraft.getMapRenderer().extractRenderState(mapId, savedData, this.mapRenderState);
-        this.map(this.mapRenderState);
-
-        this.pose().popMatrix();
+        MapInSlotRenderer.renderMap((GuiGraphicsExtractor) (Object) this, this.minecraft, itemStack, x, y);
     }
 }
